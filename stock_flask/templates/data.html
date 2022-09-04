@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Jamieson Stock Website</title>
+    <meta name="viewport" content="width=device-width, intial-scale=1"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+  </head>
+  <body>
+	<h1>Call Data</h1>
+	<h2>Ticker: <a  href='https://www.etrade.wallst.com/v1/stocks/charts/charts.asp?symbol={{ ticker }}&rsO=new' target="_blank" rel="noopener noreferrer">{{ ticker }}</a> - Current Price: {{ price }} - Expiry Date: {{ option_date }} - Year Outlook: {{ year }}</h2>
+	<table>
+		<tr>
+			{% for header in table_header %}
+			<th>{{ header }}</th>
+			{% endfor %}
+		</tr>
+		{% for row in data %}
+		<tr>
+       			{% for cell in row %}
+        		<td> {{cell}} </td>
+       			{% endfor %}
+		</tr>
+		{% endfor %}
+    	</table>
+  </body>
+</html>

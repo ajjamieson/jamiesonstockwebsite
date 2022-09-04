@@ -1,0 +1,157 @@
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200,200,200);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: rgb(235,235,235);
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: rgb(250,250,250);
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245,245,245);
+}
+
+caption {
+  padding: 10px;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.hero{
+  background: #1d2026;
+  min-height: 100vh;
+  width: 100%;
+}
+
+nav{
+  display: flex;
+  align-items: center;
+  padding: 20px 8%;
+}
+
+nav .menu-img{
+  width: 25px;
+  margin-right: 20px;
+  cursor: pointer;
+
+}
+
+nav .logo{
+  width: 160px;
+  cursor: pointer;
+}
+
+nav ul{
+  flex: 1;
+  text-align: right;
+}
+
+nav ul li{
+  display: inline-block;
+  list-style: none;
+  margin: 0 20px;
+}
+
+nav ul li a{
+  text-decoration: none;
+  color: #fff;
+}
+
+.text-container{
+  max-width: 600px;
+  margin-top: 7%;
+  margin-left: 50%;
+  color: #fff;
+}
+
+.text-container h1{
+  font-size: 80px;
+  font-weight: 400;
+}
+
+.text-container a{
+  text-decoration: none;
+  background: #00986f;
+  padding: 14px 40px; 
+  display: inline-block;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 30px; 
+  border-radius: 30px;
+}
+
+.text-container-2{
+  max-width: 600px;
+  margin-top: 7%;
+  margin-left: 50%;
+  color: #fff;
+}
+
+.text-container-2 h1{
+  font-size: 80px;
+  font-weight: 400;
+}
+
+.text-container-2 a{
+  text-decoration: none;
+  background: #00986f;
+  padding: 14px 40px; 
+  display: inline-block;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 30px; 
+  border-radius: 30px;
+}
+
+.control{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 150px;
+}
+
+.control .line{
+  width: 250px;
+  height: 4px;
+  background: #fff;
+  margin: 0 20px;
+  border-radius: 2px;
+}
+
+.control .line span{
+  width: 50%;
+  height: 8px;
+  margin-top: -2px;
+  border-radius: 4px;
+  background: #00986f;
+  display: block;
+}
+
+.active{
+  background: green;
+}
+
+.active span{
+  background: green;
+  margin-left: 31px;
+}
