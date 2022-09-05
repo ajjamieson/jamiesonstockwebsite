@@ -43,6 +43,16 @@ caption {
   width: 100%;
 }
 
+.hero h1{
+  text-decoration: none;
+  color: #fff;
+}
+
+.hero h2{
+  text-decoration: none;
+  color: #fff;
+}
+
 nav{
   display: flex;
   align-items: center;

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
   </head>
   <body>
-	<h1>Call Data</h1>
+	<div class="hero">
+	<h1>Put Data</h1>
 	<h2>Ticker: <a  href='https://www.etrade.wallst.com/v1/stocks/charts/charts.asp?symbol={{ ticker }}&rsO=new' target="_blank" rel="noopener noreferrer">{{ ticker }}</a> - Current Price: {{ price }} - Expiry Date: {{ option_date }} - Year Outlook: {{ year }}</h2>
 	<table>
 		<tr>
@@ -24,5 +25,6 @@
 		</tr>
 		{% endfor %}
     	</table>
+	</div>
   </body>
 </html>
