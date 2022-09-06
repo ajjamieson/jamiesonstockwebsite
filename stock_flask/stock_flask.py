@@ -2,6 +2,7 @@ from __future__ import print_function
 import yfinance as yf
 from tabulate import tabulate as tb
 from datetime import date, datetime, timedelta
+from yahoo_earnings_calendar import YahooEarningsCalendar
 from flask import Flask, render_template, request, url_for, redirect
 import webbrowser
 import json
@@ -25,6 +26,8 @@ FORMAT = "%(asctime)-15s %(message)s"
 fmt = logging.Formatter(FORMAT, datefmt='%m/%d/%Y %I:%M:%S %p')
 handler.setFormatter(fmt)
 logger.addHandler(handler)
+
+yec = YahooEarningsCalendar()
 
 app = Flask(__name__)
 
@@ -129,6 +132,14 @@ def compute_put_single_increase(stock_data, annual, outlook, decrease_percent):
     amount_decreased = format((float(decrease_price) - current_price), '.2f')
     return [decrease_percent, amount_decreased, strike_price, premium_price, risk]
 
+def day_movement(open, current):
+    move = format(current - open, '.2f')
+    print(float(move))
+    print(current)
+    print((float(move) / current) * 200)
+    move_percent = format((float(move) / current) * 100, '.2f')
+    return move, move_percent
+
 #================================CREATE AND DISPLAY TABLE==============================================
 
 def build_call_data_table(data, years, expiry_date):
@@ -157,7 +168,14 @@ def call_page(ticker_3=None, years_3=None, date_3=None):
     table_data = build_call_data_table(data, years_3, date_3)
     expiry_date = data.options[int(date_3) - 1]
     price = data.info['currentPrice']
-    return render_template("call_data.html", year = years_3, ticker = ticker_3, option_date = expiry_date, table_header = call_table_header, data = table_data, price = price)
+    move, percent_move = day_movement(data.info['regularMarketPreviousClose'], price) 
+    fifty_avg = data.info['fiftyDayAverage']
+    twohund_avg = data.info['twoHundredDayAverage']
+    earn_date = datetime.fromtimestamp(yec.get_next_earnings_date(ticker_3)).date()
+    return render_template("call_data.html", year = years_3, ticker = ticker_3, option_date = expiry_date,
+                            table_header = call_table_header, data = table_data, price = price, move = move, 
+                            percent_move = percent_move, fifty_avg = fifty_avg, twohund_avg = twohund_avg,
+                            earn_date = earn_date)
 
 
 @app.route('/putdata/<ticker_3>/<date_3>/<years_3>')
@@ -166,7 +184,8 @@ def put_page(ticker_3=None, years_3=None, date_3=None):
     table_data = build_put_data_table(data, years_3, date_3)
     expiry_date = data.options[int(date_3) - 1]
     price = data.info['currentPrice']
-    return render_template("put_data.html", year = years_3, ticker = ticker_3, option_date = expiry_date, table_header = put_table_header, data = table_data, price = price)
+    return render_template("put_data.html", year = years_3, ticker = ticker_3, option_date = expiry_date,
+                            table_header = put_table_header, data = table_data, price = price)
 
 @app.route('/calls',methods = ['POST', 'GET'])
 def calls():
